@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType, DateType
 
 '''
-Example : Working with DataFrameReader i.e source
+Example : Working with DataFrameReader i.e source & schema
 '''
 
 if __name__ == "__main__":
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         .option("dateFormat", "M/d/y") \
         .schema(flightSchemaStruct) \
         .option("mode", "FAILFAST") \
-        .load("data/flight-time.csv") \
+        .load("source/flight-time.csv") \
     
     flightTimeCsvDF.printSchema()
     flightTimeCsvDF.show(5)
@@ -57,7 +57,7 @@ if __name__ == "__main__":
         .option("dateFormat", "M/d/y") \
         .schema(flightSchemaDDL) \
         .option("mode", "FAILFAST") \
-        .load("data/flight-time.json")
+        .load("source/flight-time.json")
     
     flightTimeJsonDF.printSchema()
     flightTimeJsonDF.show(5)
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     flightTimeParquetDF=spark.read \
         .format("parquet") \
         .option("mode", "FAILFAST") \
-        .load("data/flight-time.parquet")
+        .load("source/flight-time.parquet")
     
     flightTimeParquetDF.printSchema()
     flightTimeParquetDF.show(5)

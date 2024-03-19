@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     # Read
     survey_df = spark.read.csv(
-        "data/sample.csv", 
+        "source/sample.csv", 
         header=True, 
         inferSchema=True)
     

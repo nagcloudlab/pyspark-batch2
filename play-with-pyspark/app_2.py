@@ -16,7 +16,7 @@ if __name__ == "__main__":
     sc = SparkContext(conf = conf)
 
     # read
-    linesRDD = sc.textFile("data/sample.csv")
+    linesRDD = sc.textFile("source/sample.csv")
 
     #trannform
     partitionedRDD = linesRDD.repartition(2)

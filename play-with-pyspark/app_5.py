@@ -20,7 +20,7 @@ if __name__ == "__main__":
     flightTimeParquetDF=spark.read \
         .format("parquet") \
         .option("mode", "FAILFAST") \
-        .load("data/flight-time.parquet")
+        .load("source/flight-time.parquet")
     
     print("Num Partitions before: ", flightTimeParquetDF.rdd.getNumPartitions())
     flightTimeParquetDF.groupBy(spark_partition_id()).count().show()
@@ -31,11 +31,12 @@ if __name__ == "__main__":
     # Write
     partionedFlightTimeParquetDF=flightTimeParquetDF.repartition(1)
     print("Num Partitions after: ", partionedFlightTimeParquetDF.rdd.getNumPartitions())
+    
     partionedFlightTimeParquetDF.write \
         .format("json") \
         .mode("overwrite") \
         .partitionBy("OP_CARRIER","ORIGIN") \
-        .option("path", "dataSink/json/") \
+        .option("path", "sink/json/") \
         .option("maxRecordsPerFile", 10000) \
         .save()
    
