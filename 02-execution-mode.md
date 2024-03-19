@@ -17,20 +17,6 @@ execution mode
 2. cluster
 
 
-Spark Application(s)
----------------------
-
-    1- pyspark shell
-    2- Notebook
-    3- .py file from IDE
-    ...
-
-e.g pyspark
-
-```bash
-pyspark --help
-```
-
 ------------------------------------------------------------
 
 

@@ -1,6 +1,7 @@
 
 
 on Linux - ubuntu 22.04 
+------------------------------------------------------
 
 install java 8 or 11
 ```bash
@@ -153,14 +154,31 @@ source venv/bin/activate
 
 ------------------------------------------------------
 
-
 # Spark Environment Setup on Windows
 
-same as above, but with the following changes
+- check the java version
+```bash
+java -version
+```
 
-- download winutils.exe
+- check the python version
+```bash
+python --version
+```
+
+- install pyspark
+```bash
+pip install pyspark
+```
+
+
+- download hadoop for windows
 https://github.com/steveloughran/winutils
 - set the HARDOOP_HOME environment variable to the winutils.exe path
+
+
+- download spark from the official website
+- set the SPARK_HOME environment variable
 
 
 
