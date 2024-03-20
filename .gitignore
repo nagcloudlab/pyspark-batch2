@@ -161,3 +161,7 @@ cython_debug/
 
 
 sink/
+
+spark-warehouse/
+
+metastore_db/

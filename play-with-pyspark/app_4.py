@@ -13,7 +13,8 @@ if __name__ == "__main__":
         .appName("pyspark-app") \
         .getOrCreate()
     
-    # Read data from CSV/JSON file with custom schema
+
+    # Define schema for our data ( programmatic way)
     
     flightSchemaStruct = StructType([
         StructField("FL_DATE", DateType()),
@@ -33,23 +34,26 @@ if __name__ == "__main__":
         StructField("DISTANCE", IntegerType())
     ])
 
+    # Read data from CSV file
+    flightTimeCsvDF=spark.read \
+        .format("csv") \
+        .schema(flightSchemaStruct) \
+        .option("path", "source/flight-time.csv") \
+        .option("header", "true") \
+        .option("dateFormat", "M/d/y") \
+        .option("mode", "FAILFAST") \
+        .load() 
+    
+
+    flightTimeCsvDF.printSchema()
+    flightTimeCsvDF.show(5)
+
+
+    # Define schema for our data ( DDL way)
 
     flightSchemaDDL = """FL_DATE DATE, OP_CARRIER STRING, OP_CARRIER_FL_NUM INT, ORIGIN STRING, 
           ORIGIN_CITY_NAME STRING, DEST STRING, DEST_CITY_NAME STRING, CRS_DEP_TIME INT, DEP_TIME INT, 
           WHEELS_ON INT, TAXI_IN INT, CRS_ARR_TIME INT, ARR_TIME INT, CANCELLED INT, DISTANCE INT"""
-
-
-    # Read data from CSV file
-    flightTimeCsvDF=spark.read \
-        .format("csv") \
-        .option("header", "true") \
-        .option("dateFormat", "M/d/y") \
-        .schema(flightSchemaStruct) \
-        .option("mode", "FAILFAST") \
-        .load("source/flight-time.csv") \
-    
-    flightTimeCsvDF.printSchema()
-    flightTimeCsvDF.show(5)
 
     # Read data from JSON file
     flightTimeJsonDF=spark.read \
