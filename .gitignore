@@ -165,3 +165,9 @@ sink/
 spark-warehouse/
 
 metastore_db/
+
+output/
+
+chk-*/
+
+
